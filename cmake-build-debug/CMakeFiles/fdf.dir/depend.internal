@@ -5,18 +5,28 @@ CMakeFiles/fdf.dir/src/error_messages.c.o
  ../inc/fdf.h
  ../inc/get_next_line.h
  ../libft/includes/libft.h
- /Users/vtlostiu/Desktop/fdf_clion/src/error_messages.c
+ /Users/vtlostiu/Desktop/fdf_github/src/error_messages.c
 CMakeFiles/fdf.dir/src/get_next_line.c.o
  ../inc/get_next_line.h
  ../libft/includes/libft.h
- /Users/vtlostiu/Desktop/fdf_clion/src/get_next_line.c
+ /Users/vtlostiu/Desktop/fdf_github/src/get_next_line.c
+CMakeFiles/fdf.dir/src/list_born2die.c.o
+ ../inc/fdf.h
+ ../inc/get_next_line.h
+ ../libft/includes/libft.h
+ /Users/vtlostiu/Desktop/fdf_github/src/list_born2die.c
 CMakeFiles/fdf.dir/src/main.c.o
  ../inc/fdf.h
  ../inc/get_next_line.h
  ../libft/includes/libft.h
- /Users/vtlostiu/Desktop/fdf_clion/src/main.c
+ /Users/vtlostiu/Desktop/fdf_github/src/main.c
 CMakeFiles/fdf.dir/src/parse_map.c.o
  ../inc/fdf.h
  ../inc/get_next_line.h
  ../libft/includes/libft.h
- /Users/vtlostiu/Desktop/fdf_clion/src/parse_map.c
+ /Users/vtlostiu/Desktop/fdf_github/src/parse_map.c
+CMakeFiles/fdf.dir/src/validation.c.o
+ ../inc/fdf.h
+ ../inc/get_next_line.h
+ ../libft/includes/libft.h
+ /Users/vtlostiu/Desktop/fdf_github/src/validation.c

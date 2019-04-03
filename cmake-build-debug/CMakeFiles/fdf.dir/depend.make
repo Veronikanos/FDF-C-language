@@ -10,6 +10,11 @@ CMakeFiles/fdf.dir/src/get_next_line.c.o: ../inc/get_next_line.h
 CMakeFiles/fdf.dir/src/get_next_line.c.o: ../libft/includes/libft.h
 CMakeFiles/fdf.dir/src/get_next_line.c.o: ../src/get_next_line.c
 
+CMakeFiles/fdf.dir/src/list_born2die.c.o: ../inc/fdf.h
+CMakeFiles/fdf.dir/src/list_born2die.c.o: ../inc/get_next_line.h
+CMakeFiles/fdf.dir/src/list_born2die.c.o: ../libft/includes/libft.h
+CMakeFiles/fdf.dir/src/list_born2die.c.o: ../src/list_born2die.c
+
 CMakeFiles/fdf.dir/src/main.c.o: ../inc/fdf.h
 CMakeFiles/fdf.dir/src/main.c.o: ../inc/get_next_line.h
 CMakeFiles/fdf.dir/src/main.c.o: ../libft/includes/libft.h
@@ -19,4 +24,9 @@ CMakeFiles/fdf.dir/src/parse_map.c.o: ../inc/fdf.h
 CMakeFiles/fdf.dir/src/parse_map.c.o: ../inc/get_next_line.h
 CMakeFiles/fdf.dir/src/parse_map.c.o: ../libft/includes/libft.h
 CMakeFiles/fdf.dir/src/parse_map.c.o: ../src/parse_map.c
+
+CMakeFiles/fdf.dir/src/validation.c.o: ../inc/fdf.h
+CMakeFiles/fdf.dir/src/validation.c.o: ../inc/get_next_line.h
+CMakeFiles/fdf.dir/src/validation.c.o: ../libft/includes/libft.h
+CMakeFiles/fdf.dir/src/validation.c.o: ../src/validation.c
 

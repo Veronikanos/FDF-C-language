@@ -6,5 +6,5 @@ C_FLAGS = -g   -std=gnu99
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/vtlostiu/Desktop/fdf_clion/libft/includes -I/Users/vtlostiu/Desktop/fdf_clion/inc 
+C_INCLUDES = -I/Users/vtlostiu/Desktop/fdf_github/libft/includes -I/Users/vtlostiu/Desktop/fdf_github/inc 
 

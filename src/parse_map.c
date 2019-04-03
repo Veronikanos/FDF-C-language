@@ -95,6 +95,5 @@ int		parsing(t_map *map, t_lines *lines_head)
 		}
 		lines_head = lines_head->next;
 	}
-	printf("%d\n", map->coord[1][0].color);
 	return (0);
 }

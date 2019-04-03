@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/03 16:11:33 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/03 18:23:16 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define WIDTH		1920
 # define HEIGHT		1080
 # define NAME		"FDF BY VTLOSTIU"
+
+enum			keys
+{
+	ESC = 53,
+};
 
 typedef	struct 		s_coordinates
 {
