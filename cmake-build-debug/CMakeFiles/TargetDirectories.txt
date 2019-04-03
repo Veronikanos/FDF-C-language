@@ -1,0 +1,4 @@
+/Users/vtlostiu/Desktop/fdf_clion/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/vtlostiu/Desktop/fdf_clion/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/vtlostiu/Desktop/fdf_clion/cmake-build-debug/CMakeFiles/fdf.dir
+/Users/vtlostiu/Desktop/fdf_clion/cmake-build-debug/CMakeFiles/ft.dir

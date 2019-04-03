@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../inc/fdf.h
+stdlib.h
+-
+unistd.h
+-
+stdio.h
+-
+fcntl.h
+-
+math.h
+-
+mlx.h
+-
+get_next_line.h
+../inc/get_next_line.h
+libft.h
+../inc/libft.h
+
+../inc/get_next_line.h
+unistd.h
+-
+limits.h
+-
+stdlib.h
+-
+libft.h
+../inc/libft.h
+
+../libft/includes/libft.h
+string.h
+-
+
+/Users/vtlostiu/Desktop/fdf_clion/src/main.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_clion/src/fdf.h
+
