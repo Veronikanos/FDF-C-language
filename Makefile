@@ -20,7 +20,8 @@ SRC_N 	= main.c \
 	get_next_line.c \
 	parse_map.c \
 	validation.c \
-	list_born2die.c
+	list_born2die.c \
+	draw_map.c
 		
 
 INC = -I ./inc -I ./libft/includes/

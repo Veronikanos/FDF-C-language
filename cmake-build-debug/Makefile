@@ -1864,6 +1864,33 @@ libft/ft_word_length.c.s:
 	$(MAKE) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/libft/ft_word_length.c.s
 .PHONY : libft/ft_word_length.c.s
 
+src/draw_map.o: src/draw_map.c.o
+
+.PHONY : src/draw_map.o
+
+# target to build an object file
+src/draw_map.c.o:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/draw_map.c.o
+.PHONY : src/draw_map.c.o
+
+src/draw_map.i: src/draw_map.c.i
+
+.PHONY : src/draw_map.i
+
+# target to preprocess a source file
+src/draw_map.c.i:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/draw_map.c.i
+.PHONY : src/draw_map.c.i
+
+src/draw_map.s: src/draw_map.c.s
+
+.PHONY : src/draw_map.s
+
+# target to generate assembly for a file
+src/draw_map.c.s:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/draw_map.c.s
+.PHONY : src/draw_map.c.s
+
 src/error_messages.o: src/error_messages.c.o
 
 .PHONY : src/error_messages.o
@@ -2228,6 +2255,9 @@ help:
 	@echo "... libft/ft_word_length.o"
 	@echo "... libft/ft_word_length.i"
 	@echo "... libft/ft_word_length.s"
+	@echo "... src/draw_map.o"
+	@echo "... src/draw_map.i"
+	@echo "... src/draw_map.s"
 	@echo "... src/error_messages.o"
 	@echo "... src/error_messages.i"
 	@echo "... src/error_messages.s"

@@ -12,28 +12,54 @@
 
 #include "fdf.h"
 
-
-int press_key(int key, t_map *map)
+int kb_press_key(int key, t_map *map)
 {
 	if (key == ESC)
 		exit(0);
-	//mlx_pixel_put(mlx_ptr, win_ptr, )
+	if (key == LEFT_ARROW)
+		map->move.x -= 10;
+	if (key == RIGHT_ARROW)
+		map->move.x += 10;
+	if (key == UP_ARROW)
+		map->move.y -= 10;
+	if (key == DOWN_ARROW)
+		map->move.y += 10;
+	draw_map(map);
 	return (0);
+}
+
+int mouse_scroll(int key, int x, int y, t_map *map)
+{
+	x = x + 1;
+	y = y + 1;
+
+	if (key == MOUSE_UP && map->zoom < 142)
+		map->zoom += 1;
+	if (key == MOUSE_DOWN && map->zoom > 2)
+		map->zoom -= 1;
+	draw_map(map);
+	return (0);
+}
+
+static t_map	*init(t_map *map)
+{
+	if (!map)
+		return (NULL);
+	map->width = 0;
+	map->heigth = 0;
+	map->zoom = 20;
+	return (map);
 }
 
 int main(int argc, char **argv)
 {
 	t_map 	*map;
 	t_lines *lines_head;
-	void	*mlx_ptr;
-	void	*win_ptr;
 
 	lines_head = NULL;
 	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))))
 		errors_msg(4);
-	map->width = 0;
-	map->heigth = 0;
-
+	init(map);
 	if (argc != 2)
 		errors_msg(2);
 	map->fd = open(argv[1], O_RDONLY);
@@ -41,31 +67,18 @@ int main(int argc, char **argv)
 	parsing(map, lines_head);
 	close(map->fd);
 
+	map->mlx_ptr = mlx_init();
+	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, NAME);
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, NAME);
-//	win_ptr = mlx_new_window(mlx_ptr, 500, 500, NAME);
-//	mlx_pixel_put(mlx_ptr, win_ptr, WIDTH / 2, HEIGHT / 2, 0xFF0000);
+	draw_map(map);
+	//mlx_key_hook(map->win_ptr, kb_press_key, map);
+	mlx_hook(map->win_ptr, 2, 5, kb_press_key, map);
+	mlx_mouse_hook(map->win_ptr, mouse_scroll, map);
 
-	int y = -1;
-	while (++y < map->heigth)
-	{
-		int x = -1;
-		while (++x < map->width)
-		{
-			mlx_pixel_put(mlx_ptr, win_ptr,
-					(map->coord[y][x].x * 20 + (WIDTH / 2 - 200)),
-					((map->coord[y][x].y - map->coord[y][x].z) * 20 + HEIGHT / 2),
-					0xFF0000);
-		}
-	}
-
-
-	mlx_key_hook(win_ptr, press_key, (void *)0);
-	mlx_loop(mlx_ptr);
+	mlx_loop(map->mlx_ptr);
 
 	system("leaks -q fdf");
-
+	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 //	ft_putstr("Usage: ./fdf map.fdf\n");
 	return (0);
 }
