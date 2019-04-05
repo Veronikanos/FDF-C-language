@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/04 20:59:46 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/05 15:11:41 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ enum			keys
 	ESC = 53, LEFT_ARROW = 123,
 	RIGHT_ARROW = 124, UP_ARROW = 126,
 	DOWN_ARROW = 125, MOUSE_UP = 4,
-	MOUSE_DOWN = 5,
+	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
+
 
 };
 
@@ -46,18 +47,25 @@ typedef	struct 		s_coordinates
 	int 	color;
 }					t_coord;
 
-typedef	struct 		s_vector
+typedef	struct 		s_vector2
 {
-	int		x;
-	int		y;
-}					t_vec;
+	float	x;
+	float	y;
+}					t_vec2;
+
+typedef	struct 		s_vector3
+{
+	float	x;
+	float	y;
+	float	z;
+}					t_vec3;
 
 typedef struct		s_map
 {
 	size_t		width;
 	size_t		heigth;
-	size_t 		zoom;
-	t_vec 		move;
+	t_vec3 		zoom;
+	t_vec2 		move;
 	t_coord		**coord;
 	int			fd;
 	void		*mlx_ptr;

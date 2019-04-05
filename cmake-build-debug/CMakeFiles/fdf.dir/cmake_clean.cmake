@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/fdf.dir/src/draw_map.c.o"
   "CMakeFiles/fdf.dir/src/error_messages.c.o"
   "CMakeFiles/fdf.dir/src/get_next_line.c.o"
   "CMakeFiles/fdf.dir/src/list_born2die.c.o"

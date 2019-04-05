@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:01:25 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/04 21:17:30 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/05 15:33:20 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void		draw_map(t_map *map)
 			mlx_clear_window(map->mlx_ptr, map->win_ptr);
 			if (x >= 0 && y >= 0 && x <= WIDTH && y <= HEIGHT)
 				mlx_pixel_put(map->mlx_ptr, map->win_ptr,
-				(map->coord[y][x].x * map->zoom + map->move.x + HALF_WIDTH),
-				((map->coord[y][x].y - map->coord[y][x].z) * map->zoom + map->move.y + HALF_HEIGHT),
+				map->coord[y][x].x * map->zoom.x + map->move.x,
+				(map->coord[y][x].y * map->zoom.y + map->move.y
+				- (map->coord[y][x].z * map->zoom.z)),
 			0xFF0000);
 		}
 	}
