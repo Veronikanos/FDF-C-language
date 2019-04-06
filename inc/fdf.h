@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/05 15:11:41 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/06 21:26:55 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define HEIGHT			1080
 # define HALF_WIDTH		960
 # define HALF_HEIGHT	540
+# define ZOOMZ			0.5f
+# define CENTR_Y		map->coord[0][0].y
+# define CENTR_Z		map->coord[0][0].z
 # define NAME		"FDF BY VTLOSTIU"
 
 enum			keys
@@ -34,6 +37,7 @@ enum			keys
 	RIGHT_ARROW = 124, UP_ARROW = 126,
 	DOWN_ARROW = 125, MOUSE_UP = 4,
 	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
+	SIX = 88,
 
 
 };
@@ -46,6 +50,12 @@ typedef	struct 		s_coordinates
 	double 	z_orig;
 	int 	color;
 }					t_coord;
+
+//typedef	struct 		s_center
+//{
+//	float	x;
+//	float	y;
+//}					t_cen;
 
 typedef	struct 		s_vector2
 {
@@ -66,6 +76,7 @@ typedef struct		s_map
 	size_t		heigth;
 	t_vec3 		zoom;
 	t_vec2 		move;
+	//t_cen		center;
 	t_coord		**coord;
 	int			fd;
 	void		*mlx_ptr;
@@ -79,7 +90,7 @@ typedef struct 			s_lines
 	size_t			words;
 }						t_lines;
 
-void    is_file_valid(t_map *map, t_lines **lines_head);
+void	is_file_valid(t_map *map, t_lines **lines_head);
 void	errors_msg(int err);
 void	ft_add_to_end(t_lines **head, char *str, size_t words);
 void	ft_del_all(t_lines **head);

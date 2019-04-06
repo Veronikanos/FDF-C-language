@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:23:34 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/02 18:23:36 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/06 20:21:01 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void		is_file_valid(t_map *map, t_lines **lines_head)
 	char	*buf;
 	int		i;
 
-	map->width = 0;
-	map->heigth = 0;
 	i = 0;
 	while (get_next_line(map->fd, &buf) == 1 && ++i)
 	{
