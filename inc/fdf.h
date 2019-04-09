@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/06 21:26:55 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/09 20:10:37 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@
 # define HALF_WIDTH		960
 # define HALF_HEIGHT	540
 # define ZOOMZ			0.5f
-# define CENTR_Y		map->coord[0][0].y
-# define CENTR_Z		map->coord[0][0].z
+# define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
 
 enum			keys
@@ -37,25 +36,10 @@ enum			keys
 	RIGHT_ARROW = 124, UP_ARROW = 126,
 	DOWN_ARROW = 125, MOUSE_UP = 4,
 	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
-	SIX = 88,
-
+	SIX = 88, FIVE = 87, THREE = 85,
+	TWO = 84, NINE = 92, EIGHT = 91
 
 };
-
-typedef	struct 		s_coordinates
-{
-	double	x;
-	double 	y;
-	double  z;
-	double 	z_orig;
-	int 	color;
-}					t_coord;
-
-//typedef	struct 		s_center
-//{
-//	float	x;
-//	float	y;
-//}					t_cen;
 
 typedef	struct 		s_vector2
 {
@@ -65,10 +49,17 @@ typedef	struct 		s_vector2
 
 typedef	struct 		s_vector3
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }					t_vec3;
+
+typedef	struct 		s_coordinates
+{
+	t_vec3	pos;
+	double 	z_orig;
+	int 	color;
+}					t_coord;
 
 typedef struct		s_map
 {
@@ -78,6 +69,7 @@ typedef struct		s_map
 	t_vec2 		move;
 	//t_cen		center;
 	t_coord		**coord;
+	
 	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;

@@ -28,9 +28,9 @@ void		draw_map(t_map *map)
 			mlx_clear_window(map->mlx_ptr, map->win_ptr);
 			if (x >= 0 && y >= 0 && x <= WIDTH && y <= HEIGHT)
 				mlx_pixel_put(map->mlx_ptr, map->win_ptr,
-				map->coord[y][x].x * map->zoom.x + map->move.x,
-				(map->coord[y][x].y * map->zoom.y + map->move.y
-				- (map->coord[y][x].z * map->zoom.z)),
+				map->coord[y][x].pos.x * map->zoom.x + map->move.x,
+				(map->coord[y][x].pos.y * map->zoom.y + map->move.y
+				- (map->coord[y][x].pos.z * map->zoom.z)),
 			0xFF0000);
 		}
 	}

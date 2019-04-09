@@ -87,10 +87,10 @@ int		parsing(t_map *map, t_lines *lines_head)
 		i = 0;
 		while (++x < map->width)
 		{
-			map->coord[y][x].y = y;
-			map->coord[y][x].x = x;
-			map->coord[y][x].z = ft_atoi_i(lines_head->str, &i);
-			map->coord[y][x].z_orig = map->coord[y][x].z;
+			map->coord[y][x].pos.y = y;
+			map->coord[y][x].pos.x = x;
+			map->coord[y][x].pos.z = ft_atoi_i(lines_head->str, &i);
+			map->coord[y][x].z_orig = map->coord[y][x].pos.z;
 			map->coord[y][x].color = ft_atoi_base(lines_head->str, &i);
 		}
 		lines_head = lines_head->next;
