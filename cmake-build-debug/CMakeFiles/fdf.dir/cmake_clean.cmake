@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/fdf.dir/src/list_born2die.c.o"
   "CMakeFiles/fdf.dir/src/main.c.o"
   "CMakeFiles/fdf.dir/src/parse_map.c.o"
+  "CMakeFiles/fdf.dir/src/rotate_map.c.o"
   "CMakeFiles/fdf.dir/src/validation.c.o"
   "fdf.pdb"
   "fdf"

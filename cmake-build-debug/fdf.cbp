@@ -340,6 +340,9 @@
 		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/src/parse_map.c">
 			<Option target="fdf"/>
 		</Unit>
+		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/src/rotate_map.c">
+			<Option target="fdf"/>
+		</Unit>
 		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/src/validation.c">
 			<Option target="fdf"/>
 		</Unit>

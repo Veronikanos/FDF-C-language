@@ -6,7 +6,7 @@
 /*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/09 20:10:37 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/10 21:47:29 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define HALF_WIDTH		960
-# define HALF_HEIGHT	540
+# define HALF_WIDTH		WIDTH / 2.0
+# define HALF_HEIGHT	HEIGHT / 2.0
 # define ZOOMZ			0.5f
 # define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
@@ -37,14 +37,22 @@ enum			keys
 	DOWN_ARROW = 125, MOUSE_UP = 4,
 	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
 	SIX = 88, FIVE = 87, THREE = 85,
-	TWO = 84, NINE = 92, EIGHT = 91
+	TWO = 84, NINE = 92, EIGHT = 91,
+	R = 15,
 
 };
 
+typedef	struct 		s_angle
+{
+	size_t	angle_x;
+	size_t	angle_y;
+	size_t	angle_z;
+}					t_angle;
+
 typedef	struct 		s_vector2
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }					t_vec2;
 
 typedef	struct 		s_vector3
@@ -64,12 +72,11 @@ typedef	struct 		s_coordinates
 typedef struct		s_map
 {
 	size_t		width;
-	size_t		heigth;
+	size_t		height;
 	t_vec3 		zoom;
 	t_vec2 		move;
-	//t_cen		center;
+	t_angle		angle;
 	t_coord		**coord;
-	
 	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -89,6 +96,7 @@ void	ft_del_all(t_lines **head);
 int		parsing(t_map *map, t_lines *lines_head);
 int		is_hex(char c);
 void	draw_map(t_map *map);
+void 	rotate_map(t_map *map, int i);
 // int		ft_atoi_i(const char *str, size_t *i);
 
 #endif

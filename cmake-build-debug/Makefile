@@ -2026,6 +2026,33 @@ src/parse_map.c.s:
 	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/parse_map.c.s
 .PHONY : src/parse_map.c.s
 
+src/rotate_map.o: src/rotate_map.c.o
+
+.PHONY : src/rotate_map.o
+
+# target to build an object file
+src/rotate_map.c.o:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/rotate_map.c.o
+.PHONY : src/rotate_map.c.o
+
+src/rotate_map.i: src/rotate_map.c.i
+
+.PHONY : src/rotate_map.i
+
+# target to preprocess a source file
+src/rotate_map.c.i:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/rotate_map.c.i
+.PHONY : src/rotate_map.c.i
+
+src/rotate_map.s: src/rotate_map.c.s
+
+.PHONY : src/rotate_map.s
+
+# target to generate assembly for a file
+src/rotate_map.c.s:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/rotate_map.c.s
+.PHONY : src/rotate_map.c.s
+
 src/validation.o: src/validation.c.o
 
 .PHONY : src/validation.o
@@ -2273,6 +2300,9 @@ help:
 	@echo "... src/parse_map.o"
 	@echo "... src/parse_map.i"
 	@echo "... src/parse_map.s"
+	@echo "... src/rotate_map.o"
+	@echo "... src/rotate_map.i"
+	@echo "... src/rotate_map.s"
 	@echo "... src/validation.o"
 	@echo "... src/validation.i"
 	@echo "... src/validation.s"

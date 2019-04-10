@@ -12,54 +12,35 @@
 
 #include "fdf.h"
 
-static t_vec3		rotate_z(t_vec3 px, double angle)
+static t_vec3	reset_zoom(void)
 {
-	return ((t_vec3){ px.x * cos(angle) - px.y * sin(angle),
-						px.x * sin(angle) + px.y * cos(angle),
-						px.z });
+	return ((t_vec3){ 20, 20, 20 });
 }
 
-static t_vec3		rotate_y(t_vec3 px, double angle)
+static t_vec2	alignment(size_t width, size_t height, t_vec3 zoom)
 {
-	return ((t_vec3){ px.x * cos(angle) + px.z * sin(angle),
-						px.y,
-						-px.x * sin(angle) + px.z * cos(angle) });
+	return ((t_vec2){ (HALF_WIDTH - width / 2.0 * zoom.x),
+					  (HALF_HEIGHT - height / 2.0 * zoom.y) });
 }
 
-static t_vec3		rotate_x(t_vec3 px, double angle)
+void	reset_img(t_map *map)
 {
-	return ((t_vec3){ px.x,
-						px.y * cos(angle) + px.z * sin(angle),
-						-px.y * sin(angle) + px.z * cos(angle) });
-}
+	size_t		y;
+	size_t		x;
 
-static void 	rotate_map(t_map *map, int i)
-{
-	int y;
-	int x;
-
-	y = -1;
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	while (++y < map->heigth)
+	y = UINT64_MAX;
+	while (++y < map->height)
 	{
-		x = -1;
-		while (++x < map->width)
+		x = UINT64_MAX;
+		while (map->width > ++x)
 		{
-			if (i == 6)
-				map->coord[y][x].pos = rotate_x(map->coord[y][x].pos, ANGLE);
-			else if (i == 5)
-				map->coord[y][x].pos = rotate_x(map->coord[y][x].pos, -ANGLE);
-			else if (i == 3)
-				map->coord[y][x].pos = rotate_y(map->coord[y][x].pos, ANGLE);
-			else if (i == 2)
-				map->coord[y][x].pos = rotate_y(map->coord[y][x].pos, -ANGLE);
-			else if (i == 9)
-				map->coord[y][x].pos = rotate_z(map->coord[y][x].pos, ANGLE);
-			else if (i == 8)
-				map->coord[y][x].pos = rotate_z(map->coord[y][x].pos, -ANGLE);
+			map->coord[y][x].pos.x = x;
+			map->coord[y][x].pos.y = y;
+			map->coord[y][x].pos.z = map->coord[y][x].z_orig;
 		}
 	}
-
+	map->zoom = reset_zoom();
+	map->move = alignment(map->width, map->height, map->zoom);
 }
 
 int kb_press_key(int key, t_map *map)
@@ -80,6 +61,8 @@ int kb_press_key(int key, t_map *map)
 		map->zoom.z += ZOOMZ;
 	if (key == MINUS)
 		map->zoom.z -= ZOOMZ;
+	if (key == R)
+		reset_img(map);
 	if ((key == SIX && (k_num = 6))
 	|| (key == FIVE && (k_num = 5))
 	|| (key == THREE && (k_num = 3))
@@ -112,30 +95,25 @@ int mouse_scroll(int key, int x, int y, t_map *map)
 	return (0);
 }
 
-static t_map	*alignment(t_map *map)
-{
-	map->move.x -= map->width / 2 * map->zoom.x;
-	map->move.y -= map->heigth / 2 * map->zoom.y;
-	map->mlx_ptr = mlx_init();
-	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, NAME);
-	return (map);
-}
-
 static t_map	*init(t_map *map)
 {
 	if (!map)
 		return (NULL);
+	map->mlx_ptr = mlx_init();
+	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, NAME);
 	map->width = 0;
-	map->heigth = 0;
-	map->zoom = (t_vec3){ 20, 20, 20 };
-	map->move = (t_vec2){ HALF_WIDTH, HALF_HEIGHT };
+	map->height = 0;
+	map->zoom = reset_zoom();
+//	map->angle.angle_x = 0;
+//	map->angle.angle_y = 0;
+//	map->angle.angle_z = 0;
 	return (map);
 }
 
 int main(int argc, char **argv)
 {
-	t_map 	*map;
-	t_lines *lines_head;
+	t_map	*map;
+	t_lines	*lines_head;
 
 	lines_head = NULL;
 	if (argc != 2)
@@ -148,7 +126,7 @@ int main(int argc, char **argv)
 	parsing(map, lines_head);
 	close(map->fd);
 
-	alignment(map);
+	map->move = alignment(map->width, map->height, map->zoom);
 	draw_map(map);
 	mlx_hook(map->win_ptr, 2, 5, kb_press_key, map);
 	mlx_mouse_hook(map->win_ptr, mouse_scroll, map);

@@ -78,7 +78,7 @@ void		is_file_valid(t_map *map, t_lines **lines_head)
 	{
 		if (is_valid_row(buf))
 		{
-			++map->heigth;
+			++map->height;
 			if (map->width == 0)
 			{
 				if ((map->width = ft_count_words(buf, 32)) == 0)

@@ -30,6 +30,11 @@ CMakeFiles/fdf.dir/src/parse_map.c.o
  ../inc/get_next_line.h
  ../libft/includes/libft.h
  /Users/vtlostiu/Desktop/fdf_github/src/parse_map.c
+CMakeFiles/fdf.dir/src/rotate_map.c.o
+ ../inc/fdf.h
+ ../inc/get_next_line.h
+ ../libft/includes/libft.h
+ /Users/vtlostiu/Desktop/fdf_github/src/rotate_map.c
 CMakeFiles/fdf.dir/src/validation.c.o
  ../inc/fdf.h
  ../inc/get_next_line.h

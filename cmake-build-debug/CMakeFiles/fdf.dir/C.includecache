@@ -38,7 +38,31 @@ libft.h
 string.h
 -
 
+/Users/vtlostiu/Desktop/fdf_github/src/draw_map.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
+/Users/vtlostiu/Desktop/fdf_github/src/error_messages.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
+/Users/vtlostiu/Desktop/fdf_github/src/list_born2die.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
 /Users/vtlostiu/Desktop/fdf_github/src/main.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
+/Users/vtlostiu/Desktop/fdf_github/src/parse_map.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
+/Users/vtlostiu/Desktop/fdf_github/src/rotate_map.c
+fdf.h
+/Users/vtlostiu/Desktop/fdf_github/src/fdf.h
+
+/Users/vtlostiu/Desktop/fdf_github/src/validation.c
 fdf.h
 /Users/vtlostiu/Desktop/fdf_github/src/fdf.h
 

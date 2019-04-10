@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/vtlostiu/Desktop/fdf_github/src/list_born2die.c" "/Users/vtlostiu/Desktop/fdf_github/cmake-build-debug/CMakeFiles/fdf.dir/src/list_born2die.c.o"
   "/Users/vtlostiu/Desktop/fdf_github/src/main.c" "/Users/vtlostiu/Desktop/fdf_github/cmake-build-debug/CMakeFiles/fdf.dir/src/main.c.o"
   "/Users/vtlostiu/Desktop/fdf_github/src/parse_map.c" "/Users/vtlostiu/Desktop/fdf_github/cmake-build-debug/CMakeFiles/fdf.dir/src/parse_map.c.o"
+  "/Users/vtlostiu/Desktop/fdf_github/src/rotate_map.c" "/Users/vtlostiu/Desktop/fdf_github/cmake-build-debug/CMakeFiles/fdf.dir/src/rotate_map.c.o"
   "/Users/vtlostiu/Desktop/fdf_github/src/validation.c" "/Users/vtlostiu/Desktop/fdf_github/cmake-build-debug/CMakeFiles/fdf.dir/src/validation.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

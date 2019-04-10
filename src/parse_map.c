@@ -76,10 +76,10 @@ int		parsing(t_map *map, t_lines *lines_head)
 	size_t	x;
 	size_t	i;
 
-	if (!(map->coord = (t_coord **)ft_memalloc(map->heigth * sizeof(t_coord *))))
+	if (!(map->coord = (t_coord **)ft_memalloc(map->height * sizeof(t_coord *))))
 		errors_msg(4);
 	y = -1;
-	while (lines_head && ++y < map->heigth)
+	while (lines_head && ++y < map->height)
 	{
 		if (!(map->coord[y] = (t_coord *)ft_memalloc(map->width * sizeof(t_coord))))
 			errors_msg(4);
