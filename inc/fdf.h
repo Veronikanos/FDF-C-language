@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/10 21:47:29 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/12 20:23:57 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,6 @@ enum			keys
 
 };
 
-typedef	struct 		s_angle
-{
-	size_t	angle_x;
-	size_t	angle_y;
-	size_t	angle_z;
-}					t_angle;
-
 typedef	struct 		s_vector2
 {
 	double	x;
@@ -75,11 +68,16 @@ typedef struct		s_map
 	size_t		height;
 	t_vec3 		zoom;
 	t_vec2 		move;
-	t_angle		angle;
+	t_vec3		angle;
 	t_coord		**coord;
 	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*img_ptr;
+	int			bits_per_pixel;
+	int			*buf;
+	int 		size_line;
+	int			endian;
 }						t_map;
 
 typedef struct 			s_lines
@@ -97,6 +95,9 @@ int		parsing(t_map *map, t_lines *lines_head);
 int		is_hex(char c);
 void	draw_map(t_map *map);
 void 	rotate_map(t_map *map, int i);
+void    draw_img(t_map *map);
+void    clear_img(t_map *map);
+
 // int		ft_atoi_i(const char *str, size_t *i);
 
 #endif

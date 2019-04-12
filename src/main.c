@@ -58,12 +58,12 @@ int kb_press_key(int key, t_map *map)
 	if (key == DOWN_ARROW)
 		map->move.y += 10;
 	if (key == PLUS)
-		map->zoom.z += ZOOMZ;
+		map->zoom.z /= ZOOMZ;
 	if (key == MINUS)
-		map->zoom.z -= ZOOMZ;
+		map->zoom.z *= ZOOMZ;
 	if (key == R)
 		reset_img(map);
-	if ((key == SIX && (k_num = 6))
+	if ((key == SIX && (k_num = 6) && map->angle.x *ANGLE)
 	|| (key == FIVE && (k_num = 5))
 	|| (key == THREE && (k_num = 3))
 	|| (key == TWO && (k_num = 2))
@@ -71,6 +71,8 @@ int kb_press_key(int key, t_map *map)
 	|| (key == EIGHT && (k_num = 8)))
 		rotate_map(map, k_num);
 	draw_map(map);
+    draw_img(map);
+    clear_img(map);
 	return (0);
 }
 
@@ -103,10 +105,12 @@ static t_map	*init(t_map *map)
 	map->win_ptr = mlx_new_window(map->mlx_ptr, WIDTH, HEIGHT, NAME);
 	map->width = 0;
 	map->height = 0;
+	map->img_ptr = mlx_new_image(map->mlx_ptr, WIDTH, HEIGHT);
+	map->buf = (int *)mlx_get_data_addr(map->img_ptr, &map->bits_per_pixel, &map->size_line, &map->endian);
 	map->zoom = reset_zoom();
-//	map->angle.angle_x = 0;
-//	map->angle.angle_y = 0;
-//	map->angle.angle_z = 0;
+	map->angle.x = 0;
+	map->angle.y = 0;
+	map->angle.z = 0;
 	return (map);
 }
 
@@ -128,8 +132,12 @@ int main(int argc, char **argv)
 
 	map->move = alignment(map->width, map->height, map->zoom);
 	draw_map(map);
+    draw_img(map);
+    clear_img(map);
 	mlx_hook(map->win_ptr, 2, 5, kb_press_key, map);
 	mlx_mouse_hook(map->win_ptr, mouse_scroll, map);
+
+
 
 	mlx_loop(map->mlx_ptr);
 
