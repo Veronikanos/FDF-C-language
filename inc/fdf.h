@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/12 20:23:57 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/13 21:39:39 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define HALF_WIDTH		WIDTH / 2.0
 # define HALF_HEIGHT	HEIGHT / 2.0
 # define ZOOMZ			0.5f
+# define RAD            (0.1 * (M_PI / 180.0))
 # define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
 
@@ -97,7 +98,11 @@ void	draw_map(t_map *map);
 void 	rotate_map(t_map *map, int i);
 void    draw_img(t_map *map);
 void    clear_img(t_map *map);
-
+void	reset(t_map *map);
+int	reset_2(t_map *map);
+t_vec3		rotate_z(t_map *map, t_vec3 px, double angle);
+t_vec3		rotate_y(t_map *map, t_vec3 px, double angle);
+t_vec3		rotate_x(t_map *map, t_vec3 px, double angle);
 // int		ft_atoi_i(const char *str, size_t *i);
 
 #endif

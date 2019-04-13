@@ -12,6 +12,29 @@
 
 #include "fdf.h"
 
+int	reset_2(t_map *map)
+{
+	size_t		y;
+	size_t		x;
+
+	y = UINT64_MAX;
+	while (++y < map->height)
+	{
+		x = UINT64_MAX;
+		while (map->width > ++x)
+		{
+			map->coord[y][x].pos.x = x;
+			map->coord[y][x].pos.y = y;
+			map->coord[y][x].pos.z = map->coord[y][x].z_orig;
+		}
+	}
+//	map->angle.x = RAD;
+//	draw_map(map);
+//	draw_img(map);
+//	clear_img(map);
+	return(0);
+}
+
 static t_vec3	reset_zoom(void)
 {
 	return ((t_vec3){ 20, 20, 20 });
@@ -23,7 +46,7 @@ static t_vec2	alignment(size_t width, size_t height, t_vec3 zoom)
 					  (HALF_HEIGHT - height / 2.0 * zoom.y) });
 }
 
-void	reset_img(t_map *map)
+void	reset(t_map *map)
 {
 	size_t		y;
 	size_t		x;
@@ -41,6 +64,10 @@ void	reset_img(t_map *map)
 	}
 	map->zoom = reset_zoom();
 	map->move = alignment(map->width, map->height, map->zoom);
+//	map->angle.x = RAD;
+    draw_map(map);
+    draw_img(map);
+    clear_img(map);
 }
 
 int kb_press_key(int key, t_map *map)
@@ -58,18 +85,21 @@ int kb_press_key(int key, t_map *map)
 	if (key == DOWN_ARROW)
 		map->move.y += 10;
 	if (key == PLUS)
-		map->zoom.z /= ZOOMZ;
+		map->zoom.z += ZOOMZ;
 	if (key == MINUS)
-		map->zoom.z *= ZOOMZ;
+		map->zoom.z -= ZOOMZ;
 	if (key == R)
-		reset_img(map);
-	if ((key == SIX && (k_num = 6) && map->angle.x *ANGLE)
+		reset(map);
+	if ((key == SIX && (k_num = 6)) //&& map->angle.x *ANGLE)
 	|| (key == FIVE && (k_num = 5))
 	|| (key == THREE && (k_num = 3))
 	|| (key == TWO && (k_num = 2))
 	|| (key == NINE && (k_num = 9))
 	|| (key == EIGHT && (k_num = 8)))
+	{
 		rotate_map(map, k_num);
+	//	reset_2(map);
+	}
 	draw_map(map);
     draw_img(map);
     clear_img(map);
@@ -94,6 +124,8 @@ int mouse_scroll(int key, int x, int y, t_map *map)
 		map->zoom.z -= 1;
 	}
 	draw_map(map);
+    draw_img(map);
+    clear_img(map);
 	return (0);
 }
 
