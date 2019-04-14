@@ -64,7 +64,9 @@ void	reset(t_map *map)
 	}
 	map->zoom = reset_zoom();
 	map->move = alignment(map->width, map->height, map->zoom);
-//	map->angle.x = RAD;
+    map->angle.x = 0;
+    map->angle.y = 0;
+    map->angle.z = 0;
     draw_map(map);
     draw_img(map);
     clear_img(map);
@@ -98,7 +100,6 @@ int kb_press_key(int key, t_map *map)
 	|| (key == EIGHT && (k_num = 8)))
 	{
 		rotate_map(map, k_num);
-	//	reset_2(map);
 	}
 	draw_map(map);
     draw_img(map);
