@@ -11,123 +11,61 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+//
+//void    draw_straight(t_draw length, t_draw point, t_draw d_xy)
+//{
+//    int    d;
+//
+//}
 
-int	reset_2(t_map *map)
+void    bresenham(t_map *map, int x1, int y1, int x2, int y2, int color)
 {
-	size_t		y;
-	size_t		x;
+    t_draw d_xy;
+    t_draw length;
+    int    len;
+    int    d;
 
-	y = UINT64_MAX;
-	while (++y < map->height)
-	{
-		x = UINT64_MAX;
-		while (map->width > ++x)
-		{
-			map->coord[y][x].pos.x = x;
-			map->coord[y][x].pos.y = y;
-			map->coord[y][x].pos.z = map->coord[y][x].z_orig;
-		}
-	}
-//	map->angle.x = RAD;
-//	draw_map(map);
-//	draw_img(map);
-//	clear_img(map);
-	return(0);
-}
-
-static t_vec3	reset_zoom(void)
-{
-	return ((t_vec3){ 20, 20, 20 });
-}
-
-static t_vec2	alignment(size_t width, size_t height, t_vec3 zoom)
-{
-	return ((t_vec2){ (HALF_WIDTH - width / 2.0 * zoom.x),
-					  (HALF_HEIGHT - height / 2.0 * zoom.y) });
-}
-
-void	reset(t_map *map)
-{
-	size_t		y;
-	size_t		x;
-
-	y = UINT64_MAX;
-	while (++y < map->height)
-	{
-		x = UINT64_MAX;
-		while (map->width > ++x)
-		{
-			map->coord[y][x].pos.x = x;
-			map->coord[y][x].pos.y = y;
-			map->coord[y][x].pos.z = map->coord[y][x].z_orig;
-		}
-	}
-	map->zoom = reset_zoom();
-	map->move = alignment(map->width, map->height, map->zoom);
-    map->angle.x = 0;
-    map->angle.y = 0;
-    map->angle.z = 0;
-    draw_map(map);
-    draw_img(map);
-    clear_img(map);
-}
-
-int kb_press_key(int key, t_map *map)
-{
-	int		k_num;
-
-	if (key == ESC)
-		exit(0);
-	if (key == LEFT_ARROW)
-		map->move.x -= 10;
-	if (key == RIGHT_ARROW)
-		map->move.x += 10;
-	if (key == UP_ARROW)
-		map->move.y -= 10;
-	if (key == DOWN_ARROW)
-		map->move.y += 10;
-	if (key == PLUS)
-		map->zoom.z += ZOOMZ;
-	if (key == MINUS)
-		map->zoom.z -= ZOOMZ;
-	if (key == R)
-		reset(map);
-	if ((key == SIX && (k_num = 6)) //&& map->angle.x *ANGLE)
-	|| (key == FIVE && (k_num = 5))
-	|| (key == THREE && (k_num = 3))
-	|| (key == TWO && (k_num = 2))
-	|| (key == NINE && (k_num = 9))
-	|| (key == EIGHT && (k_num = 8)))
-	{
-		rotate_map(map, k_num);
-	}
-	draw_map(map);
-    draw_img(map);
-    clear_img(map);
-	return (0);
-}
-
-int mouse_scroll(int key, int x, int y, t_map *map)
-{
-	x = x + 1;
-	y = y + 1;
-
-	if (key == MOUSE_UP && map->zoom.x < 142 && map->zoom.y < 142)
-	{
-		map->zoom.x += 1;
-		map->zoom.y += 1;
-		map->zoom.z += 1;
-	}
-	if (key == MOUSE_DOWN && map->zoom.x > 2 && map->zoom.y > 2)
-	{
-		map->zoom.x -= 1;
-		map->zoom.y -= 1;
-		map->zoom.z -= 1;
-	}
-	draw_map(map);
-    draw_img(map);
-    clear_img(map);
-	return (0);
+    d_xy = (t_draw){ (x2 - x1 >= 0 ? 1 : -1), (y2 - y1 >= 0 ? 1 : -1) };
+    length.x = (x2 - x1) < 0 ? (x2 - x1) * -1 : (x2 - x1) * 1;
+    length.y = (y2 - y1) < 0 ? (y2 - y1) * -1 : (y2 - y1) * 1;
+    len = (length.x - length.y > 0 ? length.x : length.y);
+    if (len == 0)
+        mlx_pixel_put(map->mlx_ptr, map->win_ptr, 0, 0, color);
+    t_draw point = (t_draw) { x1, y1 };
+    if (length.y <= length.x)
+    {
+        d =-length.x;
+        len++;
+        while (len--)
+        {
+//            draw_straight(map, length, point, d_xy);
+            mlx_pixel_put(map->mlx_ptr, map->win_ptr, point.x, point.y, color);
+            point.x += d_xy.x;
+            d += 2 * length.y;
+            if (d > 0)
+            {
+                d -= 2 * length.x;
+                point.y += d_xy.y;
+            }
+        }
+    }
+    else
+    {
+//        draw_viceversa
+        d = -length.y;
+        len++;
+        while (len--)
+        {
+            mlx_pixel_put(map->mlx_ptr, map->win_ptr, point.x, point.y, color);
+            point.y += d_xy.y;
+            d += 2 * length.x;
+            if (d > 0)
+            {
+                d -= 2 * length.y;
+                point.x += d_xy.x;
+            }
+        }
+    }
 }
 
 static t_map	*init(t_map *map)
@@ -164,13 +102,18 @@ int main(int argc, char **argv)
 	close(map->fd);
 
 	map->move = alignment(map->width, map->height, map->zoom);
+	t_vec2 start    = (t_vec2){ 500, 600 };
+	t_vec2 end      = (t_vec2){ 700, 800 };
+//	t_vec2 start2   = (t_vec2){ 800, 600 };
+//	t_vec2 end2     = (t_vec2){ 500, 800 };
+    bresenham(map, start.x, start.y, end.x, end.y, COLOR);
+//    bresenham(map, start2.x, start2.y, end2.x, end2.y, COLOR);
+//    bresenham(map, 500, 500, 700, 500, COLOR);
 	draw_map(map);
     draw_img(map);
     clear_img(map);
 	mlx_hook(map->win_ptr, 2, 5, kb_press_key, map);
 	mlx_mouse_hook(map->win_ptr, mouse_scroll, map);
-
-
 
 	mlx_loop(map->mlx_ptr);
 

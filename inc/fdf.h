@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/14 15:10:35 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/18 20:04:21 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@
 # define HEIGHT			1080
 # define HALF_WIDTH		WIDTH / 2.0
 # define HALF_HEIGHT	HEIGHT / 2.0
+# define H_WIDTH        map->width / 2
+# define H_HEIGHT       map->height / 2
+# define COLOR          0x58E6FA
 # define ZOOMZ			0.5f
-# define RAD            (0.1 * (M_PI / 180.0))
+# define RAD            2 * M_PI / 180.0
 # define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
+
+//typedef long double t_vector __attribute__((vector_size(sizeof(long double) * 3)));
 
 enum			keys
 {
@@ -39,9 +44,15 @@ enum			keys
 	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
 	SIX = 88, FIVE = 87, THREE = 85,
 	TWO = 84, NINE = 92, EIGHT = 91,
-	R = 15,
+	R = 15, PLUS2 = 24, MINUS2 = 27,
 
 };
+
+typedef	struct 		s_draw
+{
+	int	x;
+	int	y;
+}					t_draw;
 
 typedef	struct 		s_vector2
 {
@@ -69,6 +80,7 @@ typedef struct		s_map
 	size_t		height;
 	t_vec3 		zoom;
 	t_vec2 		move;
+    t_draw 		draw;
 	t_vec3		angle;
 	t_coord		**coord;
 	int			fd;
@@ -95,14 +107,13 @@ void	ft_del_all(t_lines **head);
 int		parsing(t_map *map, t_lines *lines_head);
 int		is_hex(char c);
 void	draw_map(t_map *map);
-void 	rotate_map(t_map *map, int i);
 void    draw_img(t_map *map);
 void    clear_img(t_map *map);
-void	reset(t_map *map);
-int	reset_2(t_map *map);
-t_vec3		rotate_z(t_map *map, t_vec3 px, double angle);
-t_vec3		rotate_y(t_map *map, t_vec3 px, double angle);
-t_vec3		rotate_x(t_map *map, t_vec3 px, double angle);
-// int		ft_atoi_i(const char *str, size_t *i);
+int     kb_press_key(int key, t_map *map);
+int     mouse_scroll(int key, int x, int y, t_map *map);
+t_vec3	reset_zoom(void);
+t_vec3	rotate(t_vec3 px, double angle_x, double angle_y, double angle_z);
+t_vec2	alignment(size_t width, size_t height, t_vec3 zoom);
+void    bresenham(t_map *map, int x1, int y1, int x2, int y2, int color);
 
 #endif

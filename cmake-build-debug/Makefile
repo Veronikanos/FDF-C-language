@@ -1864,6 +1864,33 @@ libft/ft_word_length.c.s:
 	$(MAKE) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/libft/ft_word_length.c.s
 .PHONY : libft/ft_word_length.c.s
 
+src/control.o: src/control.c.o
+
+.PHONY : src/control.o
+
+# target to build an object file
+src/control.c.o:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/control.c.o
+.PHONY : src/control.c.o
+
+src/control.i: src/control.c.i
+
+.PHONY : src/control.i
+
+# target to preprocess a source file
+src/control.c.i:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/control.c.i
+.PHONY : src/control.c.i
+
+src/control.s: src/control.c.s
+
+.PHONY : src/control.s
+
+# target to generate assembly for a file
+src/control.c.s:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/control.c.s
+.PHONY : src/control.c.s
+
 src/draw_map.o: src/draw_map.c.o
 
 .PHONY : src/draw_map.o
@@ -2282,6 +2309,9 @@ help:
 	@echo "... libft/ft_word_length.o"
 	@echo "... libft/ft_word_length.i"
 	@echo "... libft/ft_word_length.s"
+	@echo "... src/control.o"
+	@echo "... src/control.i"
+	@echo "... src/control.s"
 	@echo "... src/draw_map.o"
 	@echo "... src/draw_map.i"
 	@echo "... src/draw_map.s"

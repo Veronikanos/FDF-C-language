@@ -40,7 +40,7 @@ static int		ft_atoi_base_color(const char *str, size_t *i)
 		}
 	}
 	else
-		res = 0x0000FF00;
+		res = COLOR;
 	return (res);
 }
 
