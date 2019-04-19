@@ -18,28 +18,27 @@
 //
 //}
 
-void    bresenham(t_map *map, int x1, int y1, int x2, int y2, int color)
+void    bresenham(t_map *map, t_draw s, t_draw e, int color)
 {
     t_draw d_xy;
     t_draw length;
     int    len;
     int    d;
 
-    d_xy = (t_draw){ (x2 - x1 >= 0 ? 1 : -1), (y2 - y1 >= 0 ? 1 : -1) };
-    length.x = (x2 - x1) < 0 ? (x2 - x1) * -1 : (x2 - x1) * 1;
-    length.y = (y2 - y1) < 0 ? (y2 - y1) * -1 : (y2 - y1) * 1;
+    d_xy = (t_draw){ (e.x - s.x >= 0 ? 1 : -1), (e.y - s.y >= 0 ? 1 : -1) };
+    length.x = (e.x - s.x) < 0 ? (e.x - s.x) * -1 : (e.x - s.x) * 1;
+    length.y = (e.y - s.y) < 0 ? (e.y - s.y) * -1 : (e.y - s.y) * 1;
     len = (length.x - length.y > 0 ? length.x : length.y);
     if (len == 0)
-        mlx_pixel_put(map->mlx_ptr, map->win_ptr, 0, 0, color);
-    t_draw point = (t_draw) { x1, y1 };
+        pixel_to_buf(map->buf, map, d_xy, color);
+    t_draw point = (t_draw) { s.x, s.y };
     if (length.y <= length.x)
     {
         d =-length.x;
         len++;
         while (len--)
         {
-//            draw_straight(map, length, point, d_xy);
-            mlx_pixel_put(map->mlx_ptr, map->win_ptr, point.x, point.y, color);
+            pixel_to_buf(map->buf, map, point, color);
             point.x += d_xy.x;
             d += 2 * length.y;
             if (d > 0)
@@ -51,12 +50,11 @@ void    bresenham(t_map *map, int x1, int y1, int x2, int y2, int color)
     }
     else
     {
-//        draw_viceversa
         d = -length.y;
         len++;
         while (len--)
         {
-            mlx_pixel_put(map->mlx_ptr, map->win_ptr, point.x, point.y, color);
+            pixel_to_buf(map->buf, map, point, color);
             point.y += d_xy.y;
             d += 2 * length.x;
             if (d > 0)
@@ -102,11 +100,11 @@ int main(int argc, char **argv)
 	close(map->fd);
 
 	map->move = alignment(map->width, map->height, map->zoom);
-	t_vec2 start    = (t_vec2){ 500, 600 };
-	t_vec2 end      = (t_vec2){ 700, 800 };
+//	t_vec2 start    = (t_vec2){ 500, 600 };
+//	t_vec2 end      = (t_vec2){ 700, 800 };
 //	t_vec2 start2   = (t_vec2){ 800, 600 };
 //	t_vec2 end2     = (t_vec2){ 500, 800 };
-    bresenham(map, start.x, start.y, end.x, end.y, COLOR);
+ //   bresenham(map, start.x, start.y, end.x, end.y, COLOR);
 //    bresenham(map, start2.x, start2.y, end2.x, end2.y, COLOR);
 //    bresenham(map, 500, 500, 700, 500, COLOR);
 	draw_map(map);

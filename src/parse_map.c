@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:48:16 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/06 20:24:22 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/19 20:53:07 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,15 @@ int		parsing(t_map *map, t_lines *lines_head)
 
 	if (!(map->coord = (t_coord **)ft_memalloc(map->height * sizeof(t_coord *))))
 		errors_msg(4);
+    if (!(map->rot_map = (t_vec3**)ft_memalloc(map->height * sizeof(t_vec3 *))))
+        errors_msg(4);
 	y = -1;
 	while (lines_head && ++y < map->height)
 	{
 		if (!(map->coord[y] = (t_coord *)ft_memalloc(map->width * sizeof(t_coord))))
-			errors_msg(4);
+            errors_msg(4);
+        if (!(map->rot_map[y] = (t_vec3 *)ft_memalloc(map->width * sizeof(t_vec3))))
+            errors_msg(4);
 		x = -1;
 		i = 0;
 		while (++x < map->width)

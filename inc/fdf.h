@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/18 20:04:21 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/19 21:18:57 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ typedef struct		s_map
 	size_t		height;
 	t_vec3 		zoom;
 	t_vec2 		move;
-    t_draw 		draw;
+//    t_draw 		draw;
 	t_vec3		angle;
 	t_coord		**coord;
+    t_vec3		**rot_map;
 	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -114,6 +115,7 @@ int     mouse_scroll(int key, int x, int y, t_map *map);
 t_vec3	reset_zoom(void);
 t_vec3	rotate(t_vec3 px, double angle_x, double angle_y, double angle_z);
 t_vec2	alignment(size_t width, size_t height, t_vec3 zoom);
-void    bresenham(t_map *map, int x1, int y1, int x2, int y2, int color);
+void    bresenham(t_map *map, t_draw s, t_draw e, int color);
+void    pixel_to_buf(int *buf, t_map *map, t_draw px, int color);
 
 #endif
