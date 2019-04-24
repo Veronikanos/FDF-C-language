@@ -15,7 +15,8 @@
 void	errors_msg(int err)
 {
 	if (err == 2)
-		ft_putendl("Incorrect number of arguments.\n");
+		ft_putendl("Usage: ./fdf input_file.fdf\n"
+			 "Incorrect number of arguments.\n");
 	else if (err == 1)
 		ft_putendl("Incorrect file or impossible to write file.\n");
 	else if (err == 3)
@@ -24,7 +25,6 @@ void	errors_msg(int err)
 		ft_putendl("Impossible to allocate memory.\n");
 	else if (err == 5)
 		ft_putendl("There are no string to write from file.\n");
-//	ft_putendl("just err\n");
 system("leaks -q fdf");
 	exit(0);
 }

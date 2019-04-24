@@ -1864,6 +1864,33 @@ libft/ft_word_length.c.s:
 	$(MAKE) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/libft/ft_word_length.c.s
 .PHONY : libft/ft_word_length.c.s
 
+src/bresenham.o: src/bresenham.c.o
+
+.PHONY : src/bresenham.o
+
+# target to build an object file
+src/bresenham.c.o:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/bresenham.c.o
+.PHONY : src/bresenham.c.o
+
+src/bresenham.i: src/bresenham.c.i
+
+.PHONY : src/bresenham.i
+
+# target to preprocess a source file
+src/bresenham.c.i:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/bresenham.c.i
+.PHONY : src/bresenham.c.i
+
+src/bresenham.s: src/bresenham.c.s
+
+.PHONY : src/bresenham.s
+
+# target to generate assembly for a file
+src/bresenham.c.s:
+	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/src/bresenham.c.s
+.PHONY : src/bresenham.c.s
+
 src/control.o: src/control.c.o
 
 .PHONY : src/control.o
@@ -2309,6 +2336,9 @@ help:
 	@echo "... libft/ft_word_length.o"
 	@echo "... libft/ft_word_length.i"
 	@echo "... libft/ft_word_length.s"
+	@echo "... src/bresenham.o"
+	@echo "... src/bresenham.i"
+	@echo "... src/bresenham.s"
 	@echo "... src/control.o"
 	@echo "... src/control.i"
 	@echo "... src/control.s"

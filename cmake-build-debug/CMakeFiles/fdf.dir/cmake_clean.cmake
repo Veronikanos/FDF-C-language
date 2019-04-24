@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/fdf.dir/src/bresenham.c.o"
   "CMakeFiles/fdf.dir/src/control.c.o"
   "CMakeFiles/fdf.dir/src/draw_map.c.o"
   "CMakeFiles/fdf.dir/src/error_messages.c.o"

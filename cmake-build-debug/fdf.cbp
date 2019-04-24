@@ -322,6 +322,9 @@
 		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/libft/ft_word_length.c">
 			<Option target="ft"/>
 		</Unit>
+		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/src/bresenham.c">
+			<Option target="fdf"/>
+		</Unit>
 		<Unit filename="/Users/vtlostiu/Desktop/fdf_github/src/control.c">
 			<Option target="fdf"/>
 		</Unit>

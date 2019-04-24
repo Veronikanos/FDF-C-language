@@ -10,7 +10,7 @@ include_directories(libft/includes)
 include_directories(inc)
 
 add_executable(${CMAKE_PROJECT_NAME}
-                ${SOURCES}  src/control.c)
+                ${SOURCES}  src/control.c src/bresenham.c)
 
 #set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )

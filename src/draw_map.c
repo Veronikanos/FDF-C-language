@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:01:25 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/19 22:35:16 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:55:28 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void        pixel_to_buf(int *buf, t_map *map, t_draw px, int color)
             buf[px.y * WIDTH + px.x] = color;
 }
 
-static void     classic_style(t_map *map, t_vec3 **rot_map)
+static void     find_start_and_end(t_map *map)
 {
-    t_vec3  beg;
-    t_vec3  end;
-    size_t  y;
-    size_t  x;
+    t_vec3 st;
+    size_t y;
+    size_t x;
+    const t_vec3 **rot_map = (const t_vec3 **) (map->rot_map);
 
     y = UINT64_MAX;
     while (++y < map->height)
@@ -69,65 +69,44 @@ static void     classic_style(t_map *map, t_vec3 **rot_map)
         x = UINT64_MAX;
         while (++x < map->width)
         {
-            beg = rot_map[y][x];
-            end = rot_map[y][x + 1];
+            st = rot_map[y][x];
             if (x < map->width - 1)
-                bresenham(map, (t_draw){ (int)beg.x, (int)beg.y - (int)beg.z },
-                               (t_draw){ (int)end.x, (int)end.y - (int)end.z },
-                               map->coord[y][x].color);
-            end = rot_map[y + 1][x];
+                bresenham(map, (t_draw) {(int) st.x, (int) st.y - (int) st.z},
+                        (t_draw) {(int) rot_map[y][x + 1].x,
+                                  (int) rot_map[y][x + 1].y
+                                  - (int) rot_map[y][x + 1].z},
+                                  map->coord[y][x].color);
             if (y < map->height - 1)
-                bresenham(map, (t_draw){ (int)beg.x, (int)beg.y - (int)beg.z },
-                               (t_draw){ (int)end.x, (int)end.y - (int)end.z },
-                               map->coord[y][x].color);
+                bresenham(map, (t_draw) {(int) st.x, (int) st.y - (int) st.z},
+                        (t_draw) {(int) rot_map[y + 1][x].x,
+                                  (int) rot_map[y + 1][x].y
+                                  - (int) rot_map[y + 1][x].z},
+                                  map->coord[y][x].color);
         }
     }
 }
 
-void		draw_map(t_map *map)
+void            draw_map(t_map *map)
 {
-	size_t y;
-	size_t x;
+    size_t y;
+    size_t x;
     t_vec3 new;
-
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	y = UINT64_MAX;
-	while (++y < map->height)
-	{
-		x = UINT64_MAX;
-		while (++x < map->width)
-		{
+    mlx_clear_window(map->mlx_ptr, map->win_ptr);
+    y = UINT64_MAX;
+    while (++y < map->height) {
+        x = UINT64_MAX;
+        while (++x < map->width) {
             new = map->coord[y][x].pos;
             new.x -= H_WIDTH;
             new.y -= H_HEIGHT;
-		    new.x *= map->zoom.x;
+            new.x *= map->zoom.x;
             new.y *= map->zoom.y;
             new.z *= map->zoom.z;
             new = rotate(new, map->angle.x, map->angle.y, map->angle.z);
             new.x += H_WIDTH;
             new.y += H_HEIGHT;
             map->rot_map[y][x] = new;
-		}
-	}
-	classic_style(map, map->rot_map);
-//	y = UINT64_MAX;
-//	while (++y < map->height)
-//	{
-//		x = UINT64_MAX;
-//		while (++x < map->width)
-//		{
-//            if (x < map->width - 1)
-//                bresenham(map, (t_draw){ (int)map->rot_map[y][x].x, (int)map->rot_map[y][x].y
-//                                                                     - (int)map->rot_map[y][x].z },
-//                               (t_draw){ (int)map->rot_map[y][x + 1].x, (int)map->rot_map[y][x + 1].y
-//                                                                       - (int)map->rot_map[y][x + 1].z }, map->coord[y][x].color);
-//            if (y < map->height - 1)
-//                bresenham(map, (t_draw){ (int)map->rot_map[y][x].x, (int)map->rot_map[y][x].y
-//                                                                 - (int)map->rot_map[y][x].z },
-//                               (t_draw){ (int)map->rot_map[y + 1][x].x, (int)map->rot_map[y + 1][x].y
-//                                                                     - (int)map->rot_map[y + 1][x].z }, map->coord[y][x].color);
-//		}
-//	}
-
+        }
+    }
+    find_start_and_end(map);
 }
-

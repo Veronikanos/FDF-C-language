@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:48:16 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/19 20:53:07 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/24 18:15:31 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,16 @@ int		parsing(t_map *map, t_lines *lines_head)
 	size_t	x;
 	size_t	i;
 
-	if (!(map->coord = (t_coord **)ft_memalloc(map->height * sizeof(t_coord *))))
+	if (!(map->coord = (t_coord **)malloc(map->height * sizeof(t_coord *)))
+    | !(map->rot_map = (t_vec3 **)malloc(map->height * sizeof(t_vec3 *))))
 		errors_msg(4);
-    if (!(map->rot_map = (t_vec3**)ft_memalloc(map->height * sizeof(t_vec3 *))))
-        errors_msg(4);
-	y = -1;
+	y = UINT64_MAX;
 	while (lines_head && ++y < map->height)
 	{
-		if (!(map->coord[y] = (t_coord *)ft_memalloc(map->width * sizeof(t_coord))))
+		if (!(map->coord[y] = (t_coord *)malloc(map->width * sizeof(t_coord)))
+		| !(map->rot_map[y] = (t_vec3 *)malloc(map->width * sizeof(t_vec3))))
             errors_msg(4);
-        if (!(map->rot_map[y] = (t_vec3 *)ft_memalloc(map->width * sizeof(t_vec3))))
-            errors_msg(4);
-		x = -1;
+        x = UINT64_MAX;
 		i = 0;
 		while (++x < map->width)
 		{

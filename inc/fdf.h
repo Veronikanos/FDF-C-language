@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/19 21:18:57 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/24 16:45:25 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define H_HEIGHT       map->height / 2
 # define COLOR          0x58E6FA
 # define ZOOMZ			0.5f
-# define RAD            2 * M_PI / 180.0
+# define RAD            3 * M_PI / 180.0
 # define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
 
@@ -80,10 +80,12 @@ typedef struct		s_map
 	size_t		height;
 	t_vec3 		zoom;
 	t_vec2 		move;
-//    t_draw 		draw;
 	t_vec3		angle;
 	t_coord		**coord;
     t_vec3		**rot_map;
+    t_draw      d_xy;
+    t_draw      length;
+    t_draw      point;
 	int			fd;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -117,5 +119,6 @@ t_vec3	rotate(t_vec3 px, double angle_x, double angle_y, double angle_z);
 t_vec2	alignment(size_t width, size_t height, t_vec3 zoom);
 void    bresenham(t_map *map, t_draw s, t_draw e, int color);
 void    pixel_to_buf(int *buf, t_map *map, t_draw px, int color);
+
 
 #endif
