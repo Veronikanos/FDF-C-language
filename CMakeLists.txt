@@ -11,7 +11,7 @@ include_directories(inc)
 
 add_executable(${CMAKE_PROJECT_NAME}
                 ${SOURCES}  src/control.c src/bresenham.c)
-
-#set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
+#-Wall -Wextra -Werror
+set(GCC_COVERAGE_COMPILE_FLAGS "-fsanitize=\"address\" -g -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 target_link_libraries(${CMAKE_PROJECT_NAME} ft "-lmlx -framework OpenGL -framework AppKit")

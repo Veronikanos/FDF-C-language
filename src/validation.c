@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtlostiu <vtlostiu@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:23:34 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/06 20:21:01 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/24 21:49:17 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 
 int		is_hex(char c)
 {
-	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')
-		|| (c >= 'A' && c <= 'F'))
+	if (ft_isdigit(c)
+	|| (c >= 'a' && c <= 'f')
+	|| (c >= 'A' && c <= 'F'))
 		return (1);
 	return (0);
 }
 
-static size_t		ft_is_color(char const *str, size_t *i)
+static int		ft_is_color(char const *str, size_t *i)
 {
 	size_t len;
 
-	(*i)++;
-	if (str[*i] == '0' && str[*i + 1] == 'x')
+	++(*i);
+	if (str[(*i)++] == '0' && str[(*i)++] == 'x')
 	{
-		(*i) += 2;
 		len = 0;
-		while (str[*i] != 32 && str[*i] != '\n' && str[*i] != '\0')
+		while (str[*i] && str[*i] != ' ')
 		{
-			if (!(is_hex(str[*i])))
+			if (is_hex(str[*i]))
+				len++;
+			else
 				errors_msg(1);
-			len++;
 			(*i)++;
 		}
 	}
@@ -41,29 +42,25 @@ static size_t		ft_is_color(char const *str, size_t *i)
 		errors_msg(1);
 	if (len < 1 || len > 8)
 		errors_msg(1);
-	return (*i);
+	return (1);
 }
 
 static int		is_valid_row(char const *buf)
 {
 	size_t i;
 
-	i = 0;
 	if (!buf)
 		errors_msg(5);
-	while (buf[i] != '\0')
+	i = 0;
+	while (buf[i])
 	{
-		if ((buf[i] == '-') && (ft_isdigit(buf[i + 1])) && (buf[i + 1] != '\0'))
-			i++;
-		else if (buf[i] == 32 || ft_isdigit(buf[i]))
-			i++;
-		else if (buf[i] == ',' && ft_isdigit(buf[i - 1]))
-		{
-			i = ft_is_color(buf, &i);
-			i++;
-		}
-		else
+		if (!(((buf[i] == '-' || buf[i] == '+') && ft_isdigit(buf[i + 1]))
+		|| buf[i] == ' '
+		|| ft_isdigit(buf[i])
+		|| (buf[i] == ',' && ft_isdigit(buf[i - 1])	&& ft_is_color(buf, &i))))
 			errors_msg(1);
+		if (buf[i])
+			++i;
 	}
 	return (1);
 }
@@ -71,32 +68,27 @@ static int		is_valid_row(char const *buf)
 void		is_file_valid(t_map *map, t_lines **lines_head)
 {
 	char	*buf;
-	int		i;
 
-	i = 0;
-	while (get_next_line(map->fd, &buf) == 1 && ++i)
-	{
-		if (is_valid_row(buf))
-		{
-			++map->height;
-			if (map->width == 0)
-			{
-				if ((map->width = ft_count_words(buf, 32)) == 0)
-					errors_msg(1);
-				ft_add_to_end(lines_head, buf, map->width);
-			}
-			else
-			{
-				if (map->width == ft_count_words(buf, 32))
-					ft_add_to_end(lines_head, buf, map->width);
-				else
-				{
-					ft_del_all(lines_head);
-					errors_msg(1);
-				}
-			}
-			ft_memdel((void *) &buf);
-		}
-	}
-	i == 0 ? errors_msg(1) : 0;
+    while (get_next_line(map->fd, &buf) == 1
+    && ++map->height && is_valid_row(buf))
+    {
+        if (map->width == 0)
+        {
+            if ((map->width = ft_count_words(buf, 32)) == 0)
+                errors_msg(1);
+            ft_add_to_end(lines_head, buf);
+        }
+        else
+        {
+            if (map->width == ft_count_words(buf, 32))
+                ft_add_to_end(lines_head, buf);
+            else
+            {
+                ft_del_all(lines_head);
+                errors_msg(1);
+            }
+        }
+        ft_memdel((void *) &buf);
+    }
+	map->height == 0 ? errors_msg(1) : 0;
 }

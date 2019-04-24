@@ -27,9 +27,11 @@ libft.h
 ../inc/get_next_line.h
 unistd.h
 -
-limits.h
--
 stdlib.h
+-
+fcntl.h
+-
+sys/stat.h
 -
 libft.h
 ../inc/libft.h
@@ -38,7 +40,7 @@ libft.h
 string.h
 -
 
-/Users/vtlostiu/Desktop/fdf_github/src/parse_map.c
+/Users/vtlostiu/Desktop/fdf_github/src/validation.c
 fdf.h
 /Users/vtlostiu/Desktop/fdf_github/src/fdf.h
 

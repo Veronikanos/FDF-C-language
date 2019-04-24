@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/24 16:45:25 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:33:33 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct 			s_lines
 
 void	is_file_valid(t_map *map, t_lines **lines_head);
 void	errors_msg(int err);
-void	ft_add_to_end(t_lines **head, char *str, size_t words);
+void	ft_add_to_end(t_lines **head, char *str);
 void	ft_del_all(t_lines **head);
 int		parsing(t_map *map, t_lines *lines_head);
 int		is_hex(char c);

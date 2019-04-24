@@ -28,7 +28,7 @@ void	ft_del_all(t_lines **head)
 	*head = NULL;
 }
 
-void		ft_add_to_end(t_lines **head, char *str, size_t words)
+void		ft_add_to_end(t_lines **head, char *str)
 {
 	t_lines *curr;
 
@@ -37,7 +37,6 @@ void		ft_add_to_end(t_lines **head, char *str, size_t words)
 		if (!(*head = (t_lines *)ft_memalloc(sizeof(t_lines))))
 			errors_msg(4);
 		(*head)->str = ft_strdup(str);
-		(*head)->words = words;
 		(*head)->next = NULL;
 	}
 	else
@@ -49,7 +48,6 @@ void		ft_add_to_end(t_lines **head, char *str, size_t words)
 			errors_msg(4);
 		curr = curr->next;
 		curr->str = ft_strdup(str);
-		curr->words = words;
 		curr->next = NULL;
 	}
 }
