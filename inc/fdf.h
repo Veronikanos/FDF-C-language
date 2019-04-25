@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/13 15:28:00 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/24 17:33:33 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/25 19:23:02 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define H_HEIGHT       map->height / 2
 # define COLOR          0x58E6FA
 # define ZOOMZ			0.5f
-# define RAD            3 * M_PI / 180.0
+# define RAD            2 * M_PI / 180.0
 # define ANGLE			10.0 * M_PI / 180.0
 # define NAME		"FDF BY VTLOSTIU"
 
@@ -43,8 +43,8 @@ enum			keys
 	DOWN_ARROW = 125, MOUSE_UP = 4,
 	MOUSE_DOWN = 5, PLUS = 69, MINUS = 78,
 	SIX = 88, FIVE = 87, THREE = 85,
-	TWO = 84, NINE = 92, EIGHT = 91,
-	R = 15, PLUS2 = 24, MINUS2 = 27,
+	TWO = 84, NINE = 92, EIGHT = 91, P = 35,
+	R = 15, I = 34, PLUS2 = 24, MINUS2 = 27,
 
 };
 
@@ -104,14 +104,13 @@ typedef struct 			s_lines
 }						t_lines;
 
 void	is_file_valid(t_map *map, t_lines **lines_head);
-void	errors_msg(int err);
+int errors_msg(int err);
 void	ft_add_to_end(t_lines **head, char *str);
 void	ft_del_all(t_lines **head);
 int		parsing(t_map *map, t_lines *lines_head);
 int		is_hex(char c);
 void	draw_map(t_map *map);
-void    draw_img(t_map *map);
-void    clear_img(t_map *map);
+void    draw_screen(t_map *map);
 int     kb_press_key(int key, t_map *map);
 int     mouse_scroll(int key, int x, int y, t_map *map);
 t_vec3	reset_zoom(void);

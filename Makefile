@@ -23,7 +23,8 @@ SRC_N 	= main.c \
 	list_born2die.c \
 	draw_map.c \
 	control.c \
-		
+	bresenham.c \
+	rotate_map.c
 
 INC = -I ./inc -I ./libft/includes/
 

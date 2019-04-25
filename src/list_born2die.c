@@ -28,7 +28,7 @@ void	ft_del_all(t_lines **head)
 	*head = NULL;
 }
 
-void		ft_add_to_end(t_lines **head, char *str)
+void	ft_add_to_end(t_lines **head, char *str)
 {
 	t_lines *curr;
 

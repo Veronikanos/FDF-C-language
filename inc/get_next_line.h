@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dromanic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 18:00:07 by dromanic          #+#    #+#             */
-/*   Updated: 2018/03/25 14:42:02 by dromanic         ###   ########.fr       */
+/*   Created: 2018/11/23 19:03:54 by vtlostiu          #+#    #+#             */
+/*   Updated: 2019/04/25 18:34:35 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
 # include <unistd.h>
+# include <limits.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <sys/stat.h>
 # include "libft.h"
-# define BUFF_SIZE 8192
-# define MAX_FD 10000
 
-int		get_next_line(const int fd, char **line);
+# define BUFF_SIZE 100
+
+typedef struct	s_struct
+{
+	char			*head;
+	int				fd;
+	struct s_struct	*next;
+}				t_struct;
+
+int				get_next_line(const int fd, char **line);
 
 #endif

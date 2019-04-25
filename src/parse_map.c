@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 17:48:16 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/24 18:15:31 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/25 18:40:58 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		atoi_letter_check(char c)
 
 static int		ft_atoi_base_color(const char *str, size_t *i)
 {
-	int 		res;
+	int		res;
 
 	res = 0;
 	if (str[(*i)++] == ',' && str[(*i)++] == '0' && str[(*i)++] == 'x')
@@ -47,10 +47,10 @@ static int		ft_atoi_base_color(const char *str, size_t *i)
 static int		ft_atoi_i(const char *str, size_t *i)
 {
 	size_t		num;
-	char	minus;
+	char		minus;
 
 	while (str[*i] == ' ' || str[*i] == '\t' || str[*i] == '\r'
-	   || str[*i] == '\n' || str[*i] == '\v' || str[*i] == '\f')
+		|| str[*i] == '\n' || str[*i] == '\v' || str[*i] == '\f')
 		(*i)++;
 	num = 0;
 	minus = 1;
@@ -70,28 +70,27 @@ static int		ft_atoi_i(const char *str, size_t *i)
 	return ((int)(num * minus));
 }
 
-int		parsing(t_map *map, t_lines *lines_head)
+int				parsing(t_map *map, t_lines *lines_head)
 {
 	size_t	y;
 	size_t	x;
 	size_t	i;
 
 	if (!(map->coord = (t_coord **)malloc(map->height * sizeof(t_coord *)))
-    | !(map->rot_map = (t_vec3 **)malloc(map->height * sizeof(t_vec3 *))))
+	| !(map->rot_map = (t_vec3 **)malloc(map->height * sizeof(t_vec3 *))))
 		errors_msg(4);
 	y = UINT64_MAX;
 	while (lines_head && ++y < map->height)
 	{
 		if (!(map->coord[y] = (t_coord *)malloc(map->width * sizeof(t_coord)))
 		| !(map->rot_map[y] = (t_vec3 *)malloc(map->width * sizeof(t_vec3))))
-            errors_msg(4);
-        x = UINT64_MAX;
+			errors_msg(4);
+		x = UINT64_MAX;
 		i = 0;
 		while (++x < map->width)
 		{
-			map->coord[y][x].pos.y = y;
-			map->coord[y][x].pos.x = x;
-			map->coord[y][x].pos.z = ft_atoi_i(lines_head->str, &i);
+			map->coord[y][x].pos = (t_vec3){ x, y,
+											ft_atoi_i(lines_head->str, &i) };
 			map->coord[y][x].z_orig = map->coord[y][x].pos.z;
 			map->coord[y][x].color = ft_atoi_base_color(lines_head->str, &i);
 		}
