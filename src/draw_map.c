@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:01:25 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/25 20:23:42 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:09:14 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static void			find_start_and_end(t_map *map)
 	size_t			y;
 	size_t			x;
 
+	if (map->width == 1 && map->height == 1)
+		pixel_to_buf(map->buf, map, (t_draw){ (int)((**rot_map).x),
+								(int)((**rot_map).y) }, (**map->coord).color);
 	y = UINT64_MAX;
 	while (++y < map->height)
 	{

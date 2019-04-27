@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-t_vec2			alignment(size_t width, size_t height, t_vec3 zoom)
+t_vec2			alignment(size_t width, size_t height)
 {
 	return ((t_vec2){ HALF_WIDTH - width / 2.0,
 					HALF_HEIGHT - height / 2.0 });
@@ -53,7 +53,7 @@ int				main(int argc, char **argv)
 	is_file_valid(map, &lines_head);
 	parsing(map, lines_head);
 	close(map->fd);
-	map->move = alignment(map->width, map->height, map->zoom);
+	map->move = alignment(map->width, map->height);
 	draw_screen(map);
 	mlx_hook(map->win_ptr, 2, 5, kb_press_key, map);
 	mlx_mouse_hook(map->win_ptr, mouse_scroll, map);

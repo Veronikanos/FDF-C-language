@@ -6,7 +6,7 @@
 /*   By: vtlostiu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 17:57:09 by vtlostiu          #+#    #+#             */
-/*   Updated: 2019/04/25 20:28:37 by vtlostiu         ###   ########.fr       */
+/*   Updated: 2019/04/26 18:08:48 by vtlostiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		reset(t_map *map)
 		}
 	}
 	map->zoom = reset_zoom();
-	map->move = alignment(map->width, map->height, map->zoom);
+	map->move = alignment(map->width, map->height);
 	map->angle = (t_vec3){ 0 };
 	draw_screen(map);
 }
@@ -82,8 +82,8 @@ int				kb_press_key(int key, t_map *map)
 		map->zoom.z -= ZOOMZ;
 	if (key == R)
 		reset(map);
-	if (key == SIX || key == FIVE || key == THREE || key == TWO || key == NINE
-		|| key == EIGHT || key == I || key == P)
+	if (key == SIX || key == FIVE || key == THREE || key == TWO
+	|| key == NINE || key == EIGHT || key == I || key == P)
 		kb_press_angle(key, map);
 	draw_screen(map);
 	return (0);
@@ -95,15 +95,15 @@ int				mouse_scroll(int key, int x, int y, t_map *map)
 	y = y + 1;
 	if (key == MOUSE_UP && map->zoom.x < 142 && map->zoom.y < 142)
 	{
-		map->zoom.x += 1;
-		map->zoom.y += 1;
-		map->zoom.z += 1;
+		map->zoom.x *= 1.1;
+		map->zoom.y *= 1.1;
+		map->zoom.z *= 1.1;
 	}
 	if (key == MOUSE_DOWN && map->zoom.x > 1 && map->zoom.y > 1)
 	{
-		map->zoom.x -= 1;
-		map->zoom.y -= 1;
-		map->zoom.z -= 1;
+		map->zoom.x *= 0.9;
+		map->zoom.y *= 0.9;
+		map->zoom.z *= 0.9;
 	}
 	draw_screen(map);
 	return (0);
