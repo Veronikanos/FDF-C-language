@@ -30,7 +30,7 @@ INC = -I ./inc -I ./libft/includes/
 
 CC = gcc -g
 
-FLAG = -Wall -Wextra #-Werror
+FLAG = -Wall -Wextra -Werror
 
 SRC = $(addprefix ./$(SRC_PATH)/, $(SRC_N))
 

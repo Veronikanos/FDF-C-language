@@ -28,7 +28,7 @@
 # define HALF_HEIGHT	HEIGHT / 2.0
 # define H_WIDTH		map->width / 2
 # define H_HEIGHT		map->height / 2
-# define COLOR			0x58E6FA
+# define COLOR			0xF80606
 # define ZOOMZ			1
 # define RAD			2 * M_PI / 180.0
 # define NAME			"FDF BY VTLOSTIU"
